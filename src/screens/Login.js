@@ -12,7 +12,10 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
 
-const Login = () => {
+const Login = (props) => {
+  const handleClick = () => {
+    props.navigation.navigate("SignUp");
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -26,7 +29,9 @@ const Login = () => {
         <Text style={styles.LoginText}>Student Login</Text>
         <View style={styles.flexStart}>
           <Text style={styles.Text1}>dont have account?</Text>
-          <Text style={styles.Text2}>Create New</Text>
+          <Text style={styles.Text2} onPress={handleClick}>
+            Create New
+          </Text>
         </View>
         <View style={styles.View1}>
           <AntDesign name={"user"} size={25} />
@@ -43,20 +48,6 @@ const Login = () => {
 
         <TouchableOpacity style={styles.Button}>
           <Text style={styles.SignIn}>Sign In</Text>
-        </TouchableOpacity>
-        <View style={styles.Or}>
-          <Text style={styles.Text1}>OR Sign in with </Text>
-        </View>
-        <TouchableOpacity style={styles.flexCenter}>
-          <View style={styles.facebook}>
-            <AntDesign name={"facebook-square"} size={25} color={"blue"} />
-          </View>
-          <View>
-            <Image
-              source={require("../../assets/google.jpeg")}
-              style={styles.Img2}
-            />
-          </View>
         </TouchableOpacity>
       </ImageBackground>
     </View>

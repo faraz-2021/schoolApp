@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import { Colors } from "../colors/ConstantColors";
 
-const SignUp = () => {
+const SignUp = (props) => {
+  const handleClick = () => {
+    props.navigation.navigate("LogIn");
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -24,14 +27,11 @@ const SignUp = () => {
         <Text style={styles.LoginText}>Create Account</Text>
         <View style={styles.flexStart}>
           <Text style={styles.Text1}>Already have account?</Text>
-          <Text style={styles.Text2}>Sign In</Text>
+          <Text style={styles.Text2} onPress={handleClick}>
+            Sign In
+          </Text>
         </View>
-        <View style={styles.View1}>
-          <TextInput style={styles.TextInput} placeholder="FirstName" />
-        </View>
-        <View style={styles.View1}>
-          <TextInput style={styles.TextInput} placeholder="LastName" />
-        </View>
+
         <View style={styles.View1}>
           <TextInput style={styles.TextInput} placeholder="E-m@il" />
         </View>
