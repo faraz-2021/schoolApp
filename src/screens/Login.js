@@ -20,10 +20,10 @@ const Login = (props) => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.Img}
-        source={require("../../assets/1.jpg")}
+        source={require("../../assets/images/Background.jpg")}
       >
         <Image
-          source={require("../../assets/graduate.png")}
+          source={require("../../assets/images/Logo.png")}
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Student Login</Text>
@@ -71,9 +71,8 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
-    borderColor: "gray",
     borderWidth: 1,
-    borderColor: "#000",
+    borderColor: Colors.black,
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -120,7 +119,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.perlBlue,
     height: 50,
     width: 320,
-    borderColor: "gray",
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -132,22 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: 320,
-    marginTop: 20,
-  },
-  facebook: {
-    width: 80,
-    height: 40,
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  Img2: {
-    width: 50,
-    height: 50,
-    borderRadius: 20,
-  },
-  Or: {
     marginTop: 20,
   },
 });

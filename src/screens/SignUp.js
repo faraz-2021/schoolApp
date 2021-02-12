@@ -18,10 +18,10 @@ const SignUp = (props) => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.Img}
-        source={require("../../assets/1.jpg")}
+        source={require("../../assets/images/Background.jpg")}
       >
         <Image
-          source={require("../../assets/graduate.png")}
+          source={require("../../assets/images/Logo.png")}
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Create Account</Text>
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
-    borderColor: "gray",
     borderWidth: 1,
     borderColor: Colors.black,
     borderRadius: 20,
@@ -123,7 +122,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.perlBlue,
     height: 50,
     width: 320,
-    borderColor: "gray",
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
