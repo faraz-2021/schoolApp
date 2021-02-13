@@ -11,6 +11,28 @@ import {
 import { Colors } from "../colors/ConstantColors";
 
 const SignUp = (props) => {
+
+
+  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+
+
+  const handleSignUp = () => {
+
+    const user = {
+      "user_name" : text,
+      "password" : password,
+      "Confirm_password":confirm,
+  }
+
+     axios.post(`${environment.apiBase}/brand/register`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+  }
   const handleClick = () => {
     props.navigation.navigate("LogIn");
   };
@@ -33,13 +55,16 @@ const SignUp = (props) => {
         </View>
 
         <View style={styles.View1}>
-          <TextInput style={styles.TextInput} placeholder="E-m@il" />
+          <TextInput style={styles.TextInput} placeholder="E-m@il" value={text}
+            onChange={(text) => setText(text)} />
         </View>
         <View style={styles.View1}>
           <TextInput
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
+            value={password}
+            onChange={(text) => setPassword(text)}
           />
         </View>
         <View style={styles.View1}>
@@ -47,9 +72,11 @@ const SignUp = (props) => {
             style={styles.TextInput}
             placeholder="Confirm Password"
             secureTextEntry={true}
+            value={confirm}
+            onChange={(text) => setConfirm(text)}
           />
         </View>
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={handleSignUp}>
           <Text style={styles.SignIn}>Create Account</Text>
         </TouchableOpacity>
       </ImageBackground>

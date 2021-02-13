@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,8 +11,26 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
+import axios from 'axios';
+import {environment} from '../../environment';
 
 const Login = (props) => {
+  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
+  
+
+  const SignIn = () => {
+
+    const user = {
+      "user_name" : text,
+      "password" : password,
+  }
+
+     axios.post(`${environment.apiBase}/brand/login`, user )
+      .then(res => {
+       props.navigation.navigate('Home')
+      })
+  }
   const handleClick = () => {
     props.navigation.navigate("SignUp");
   };
@@ -35,7 +53,12 @@ const Login = (props) => {
         </View>
         <View style={styles.View1}>
           <AntDesign name={"user"} size={25} />
-          <TextInput style={styles.TextInput} placeholder="Username" />
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Username"
+            value={text}
+            onChange={(e) => setText(e)}
+          />
         </View>
         <View style={styles.View1}>
           <Feather name={"lock"} size={25} />
@@ -43,10 +66,12 @@ const Login = (props) => {
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
+            value={password}
+            onChange={(text) => setPassword(text)}
           />
         </View>
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={SignIn}>
           <Text style={styles.SignIn}>Sign In</Text>
         </TouchableOpacity>
       </ImageBackground>

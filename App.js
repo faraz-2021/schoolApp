@@ -5,10 +5,12 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import { ScrollView } from "react-native-gesture-handler";
+import Home from './src/screens/Home';
 
 const MainNavigator = createSwitchNavigator({
   LogIn: { screen: Login },
   SignUp: { screen: SignUp },
+  HomeScreen:{ screen: Home }
 });
 const Main = createAppContainer(MainNavigator);
 
