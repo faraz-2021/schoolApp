@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,30 +7,31 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
-import axios from 'axios';
-import {environment} from '../../environment';
+import axios from "axios";
+import { environment } from "../../environment";
 
 const Login = (props) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [isLoading, setIsLoading] = useState(false);
 
-  const SignIn = () => {
-
+  const SignIn = async () => {
     const user = {
-      "user_name" : text,
-      "password" : password,
-  }
-
-     axios.post(`${environment.apiBase}/brand/login`, user )
-      .then(res => {
-       props.navigation.navigate('HomeScreen')
-      })
-  }
+      user_name: text,
+      password: password,
+    };
+    setIsLoading(true);
+    const res = await axios
+      .post(`${environment.apiBase}/brand/login`, user)
+      .then((res) => {
+        props.navigation.navigate("HomeScreen");
+      });
+  };
   const handleClick = () => {
     props.navigation.navigate("SignUp");
   };
@@ -45,7 +46,7 @@ const Login = (props) => {
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Student Login</Text>
-       
+
         <View style={styles.View1}>
           <AntDesign name={"user"} size={25} />
           <TextInput
@@ -53,7 +54,6 @@ const Login = (props) => {
             placeholder="Username"
             onChange={(e) => setText(e)}
             value={text}
-
           />
         </View>
         <View style={styles.View1}>
@@ -64,12 +64,14 @@ const Login = (props) => {
             secureTextEntry={true}
             onChange={(e) => setPassword(e)}
             value={password}
-
           />
         </View>
 
         <TouchableOpacity style={styles.Button} onPress={SignIn}>
           <Text style={styles.SignIn}>Sign In</Text>
+          {isLoading ? (
+            <ActivityIndicator size="small" color={Colors.Violet} />
+          ) : null}
         </TouchableOpacity>
         <View style={styles.flexStart}>
           <Text style={styles.Text1}>dont have account?</Text>
@@ -87,7 +89,6 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 400,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -99,6 +100,8 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
+    borderWidth: 1,
+    borderColor: Colors.black,
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -147,7 +150,8 @@ const styles = StyleSheet.create({
     width: 320,
     borderRadius: 20,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent:"flex-start",
+    justifyContent:"center",
     alignItems: "center",
     marginTop: 20,
   },
