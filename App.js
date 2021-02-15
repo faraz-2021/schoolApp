@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import Login from "./src/screens/Login";
@@ -20,6 +20,7 @@ export default function App() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Main />
       </ScrollView>
+      <StatusBar style="auto"/>
     </NavigationContainer>
   );
 }

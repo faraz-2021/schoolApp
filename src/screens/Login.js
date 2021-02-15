@@ -28,7 +28,7 @@ const Login = (props) => {
 
      axios.post(`${environment.apiBase}/brand/login`, user )
       .then(res => {
-       props.navigation.navigate('Home')
+       props.navigation.navigate('HomeScreen')
       })
   }
   const handleClick = () => {
@@ -45,19 +45,15 @@ const Login = (props) => {
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Student Login</Text>
-        <View style={styles.flexStart}>
-          <Text style={styles.Text1}>dont have account?</Text>
-          <Text style={styles.Text2} onPress={handleClick}>
-            Create New
-          </Text>
-        </View>
+       
         <View style={styles.View1}>
           <AntDesign name={"user"} size={25} />
           <TextInput
             style={styles.TextInput}
             placeholder="Username"
-            value={text}
             onChange={(e) => setText(e)}
+            value={text}
+
           />
         </View>
         <View style={styles.View1}>
@@ -66,14 +62,21 @@ const Login = (props) => {
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
+            onChange={(e) => setPassword(e)}
             value={password}
-            onChange={(text) => setPassword(text)}
+
           />
         </View>
 
         <TouchableOpacity style={styles.Button} onPress={SignIn}>
           <Text style={styles.SignIn}>Sign In</Text>
         </TouchableOpacity>
+        <View style={styles.flexStart}>
+          <Text style={styles.Text1}>dont have account?</Text>
+          <Text style={styles.Text2} onPress={handleClick}>
+            Create New
+          </Text>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -96,8 +99,6 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
-    borderWidth: 1,
-    borderColor: Colors.black,
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",

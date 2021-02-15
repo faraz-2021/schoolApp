@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,30 +9,28 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Colors } from "../colors/ConstantColors";
+import axios from "axios";
+import { environment } from "../../environment";
 
 const SignUp = (props) => {
-
-
+  const [brand, setBrand] = useState("");
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-
-
   const handleSignUp = () => {
-
     const user = {
-      "user_name" : text,
-      "password" : password,
-      "Confirm_password":confirm,
-  }
+      user_name: text,
+      password: password,
+      Confirm_password: confirm,
+    };
 
-     axios.post(`${environment.apiBase}/brand/register`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  }
+    axios
+      .post(`${environment.apiBase}/brand/register`, { user })
+      .then((res) => {
+        props.navigation.navigate("LogIn");
+      });
+  };
   const handleClick = () => {
     props.navigation.navigate("LogIn");
   };
@@ -47,24 +45,31 @@ const SignUp = (props) => {
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Create Account</Text>
-        <View style={styles.flexStart}>
-          <Text style={styles.Text1}>Already have account?</Text>
-          <Text style={styles.Text2} onPress={handleClick}>
-            Sign In
-          </Text>
-        </View>
+       
+        <View style={styles.View1}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Brand"
+            onChange={(e) => setBrand(e)}
+            value={brand}
+          />
+          </View>
 
         <View style={styles.View1}>
-          <TextInput style={styles.TextInput} placeholder="E-m@il" value={text}
-            onChange={(text) => setText(text)} />
+          <TextInput
+            style={styles.TextInput}
+            placeholder="E-m@il"
+            onChange={(e) => setText(e)}
+            value={text}
+          />
         </View>
         <View style={styles.View1}>
           <TextInput
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
+            onChange={(e) => setPassword(e)}
             value={password}
-            onChange={(text) => setPassword(text)}
           />
         </View>
         <View style={styles.View1}>
@@ -72,13 +77,19 @@ const SignUp = (props) => {
             style={styles.TextInput}
             placeholder="Confirm Password"
             secureTextEntry={true}
+            onChange={(e) => setConfirm(e)}
             value={confirm}
-            onChange={(text) => setConfirm(text)}
           />
         </View>
         <TouchableOpacity style={styles.Button} onPress={handleSignUp}>
           <Text style={styles.SignIn}>Create Account</Text>
         </TouchableOpacity>
+        <View style={styles.flexStart}>
+          <Text style={styles.Text1}>Already have account?</Text>
+          <Text style={styles.Text2} onPress={handleClick}>
+            Sign In
+          </Text>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -101,8 +112,6 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
-    borderWidth: 1,
-    borderColor: Colors.black,
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
