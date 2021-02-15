@@ -3,5 +3,5 @@ export const Colors = {
   white: "#f8f1f1",
   perlBlue: "#16c79a",
   palmBlue: "#11698e",
-  Violet:"#0000ff"
+  violet:"#0000ff"
 };

@@ -70,7 +70,7 @@ const Login = (props) => {
         <TouchableOpacity style={styles.Button} onPress={SignIn}>
           <Text style={styles.SignIn}>Sign In</Text>
           {isLoading ? (
-            <ActivityIndicator size="small" color={Colors.Violet} />
+            <ActivityIndicator size="small" color={Colors.violet} />
           ) : null}
         </TouchableOpacity>
         <View style={styles.flexStart}>
