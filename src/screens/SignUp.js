@@ -45,7 +45,7 @@ const SignUp = (props) => {
           style={styles.Img1}
         />
         <Text style={styles.LoginText}>Create Account</Text>
-       
+
         <View style={styles.View1}>
           <TextInput
             style={styles.TextInput}
@@ -53,7 +53,7 @@ const SignUp = (props) => {
             onChange={(e) => setBrand(e)}
             value={brand}
           />
-          </View>
+        </View>
 
         <View style={styles.View1}>
           <TextInput
@@ -100,7 +100,6 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 400,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -112,6 +111,7 @@ const styles = StyleSheet.create({
   View1: {
     height: 50,
     width: 320,
+    borderWidth: 1,
     borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
