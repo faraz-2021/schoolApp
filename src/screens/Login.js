@@ -14,23 +14,31 @@ import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
 import axios from "axios";
 import { environment } from "../../environment";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = (props) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
+  const [brand, setBrand] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const SignIn = async () => {
     const user = {
-      user_name: text,
-      password: password,
+      "brand_name" : brand,
+      "user_name": text,
+     "password": password,
     };
     setIsLoading(true);
-    const res = await axios
-      .post(`${environment.apiBase}/brand/login`, user)
-      .then((res) => {
-        props.navigation.navigate("HomeScreen");
-      });
+    try {
+      await axios.post(`${environment.apiBase}/brand/login`, user)
+          .then(async (res) => {
+            console.log(res);
+              await AsyncStorage.setItem("token", res.headers.token)
+              props.navigation.navigate("HomeScreen")
+          })
+  } catch (err) {
+      console.error(err)
+  }
   };
   const handleClick = () => {
     props.navigation.navigate("SignUp");
@@ -51,9 +59,20 @@ const Login = (props) => {
           <AntDesign name={"user"} size={25} />
           <TextInput
             style={styles.TextInput}
+            placeholder="Brand"
+            onChangeText={(e) => setBrand(e)}
+            value={brand}
+            autoCapitalize="none"
+          />
+        </View>
+        <View style={styles.View1}>
+          <AntDesign name={"user"} size={25} />
+          <TextInput
+            style={styles.TextInput}
             placeholder="Username"
-            onChange={(e) => setText(e)}
+            onChangeText={(e) => setText(e)}
             value={text}
+            autoCapitalize="none"
           />
         </View>
         <View style={styles.View1}>
@@ -62,8 +81,9 @@ const Login = (props) => {
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
-            onChange={(e) => setPassword(e)}
+            onChangeText={(e) => setPassword(e)}
             value={password}
+            autoCapitalize="none"
           />
         </View>
 
@@ -150,8 +170,8 @@ const styles = StyleSheet.create({
     width: 320,
     borderRadius: 20,
     flexDirection: "row",
-    justifyContent:"flex-start",
-    justifyContent:"center",
+    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
   },

@@ -6,6 +6,7 @@ import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import { ScrollView } from "react-native-gesture-handler";
 import Home from './src/screens/Home';
+import AccordianView from './src/screens/Menu';
 
 const MainNavigator = createSwitchNavigator({
   LogIn: { screen: Login },

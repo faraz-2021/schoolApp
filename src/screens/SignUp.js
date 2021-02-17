@@ -18,17 +18,17 @@ const SignUp = (props) => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     const user = {
-      user_name: text,
-      password: password,
-      Confirm_password: confirm,
-    };
-
-    axios
-      .post(`${environment.apiBase}/brand/register`, { user })
-      .then((res) => {
-        props.navigation.navigate("LogIn");
+      "brand_name" : brand,
+      "user_name" : text,
+      "password" : password,
+      "confirm_password" : confirm
+  }
+ console.log(user)
+    await axios.post(`${environment.apiBase}/brand/register`, user).then((res) => {
+      console.log(res.data)
+        props.navigation.navigate("HomeScreen");
       });
   };
   const handleClick = () => {
@@ -50,7 +50,7 @@ const SignUp = (props) => {
           <TextInput
             style={styles.TextInput}
             placeholder="Brand"
-            onChange={(e) => setBrand(e)}
+            onChangeText={(e) => setBrand(e)}
             value={brand}
           />
         </View>
@@ -58,8 +58,8 @@ const SignUp = (props) => {
         <View style={styles.View1}>
           <TextInput
             style={styles.TextInput}
-            placeholder="E-m@il"
-            onChange={(e) => setText(e)}
+            placeholder="Username"
+            onChangeText={(e) => setText(e)}
             value={text}
           />
         </View>
@@ -68,7 +68,7 @@ const SignUp = (props) => {
             style={styles.TextInput}
             placeholder="Password"
             secureTextEntry={true}
-            onChange={(e) => setPassword(e)}
+            onChangeText={(e) => setPassword(e)}
             value={password}
           />
         </View>
@@ -77,7 +77,7 @@ const SignUp = (props) => {
             style={styles.TextInput}
             placeholder="Confirm Password"
             secureTextEntry={true}
-            onChange={(e) => setConfirm(e)}
+            onChangeText={(e) => setConfirm(e)}
             value={confirm}
           />
         </View>
