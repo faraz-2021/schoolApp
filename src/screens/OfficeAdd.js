@@ -10,6 +10,8 @@ import {
 import axios from "axios";
 import { environment } from "../../environment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getSubBrand } from '../redux/Actions/action';
+import { connect } from "react-redux";
 
 const OfficeData = (props) => {
   const [data, setData] = useState([]);
@@ -30,8 +32,7 @@ const OfficeData = (props) => {
               res.data.forEach((e) => {
                 result.push({ name: e.subBrand_name, des: e.description });
               });
-              setData(result)
-          // });
+              props.dispatch(getSubBrand(result));
           
         });
     } catch (err) {
@@ -42,7 +43,7 @@ const OfficeData = (props) => {
   return (
     <SafeAreaView>
       <FlatList
-        data={data}
+        data={props.value[0]}
         renderItem={({ item }) => (
           <View>
             <Text>{item.name}</Text>
@@ -70,4 +71,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OfficeData;
+const mapStateToProps = (state) => {
+  return {
+    value: state.value,
+  }
+}
+const mapdispatchToProps = (dispatch) => {
+  return {
+    dispatch
+  };
+};
+
+export default connect(mapStateToProps,mapdispatchToProps)(OfficeData);

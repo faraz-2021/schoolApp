@@ -6,7 +6,8 @@ import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import { ScrollView } from "react-native-gesture-handler";
 import Home from './src/screens/Home';
-import AccordianView from './src/screens/Menu';
+import store from "./src/redux/store/store";
+import {Provider} from 'react-redux';
 
 const MainNavigator = createSwitchNavigator({
   LogIn: { screen: Login },
@@ -17,12 +18,15 @@ const Main = createAppContainer(MainNavigator);
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
+    <Provider store={store}>
+        <NavigationContainer style={styles.container}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Main />
       </ScrollView>
       <StatusBar style="auto"/>
     </NavigationContainer>
+    </Provider>
+  
   );
 }
 
