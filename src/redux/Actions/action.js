@@ -14,19 +14,19 @@ import {
 export const LoginRequest = (user) => {
   return {
     type: LOGIN_REQUEST,
-    user
+    user,
   };
 };
 export const LoginSuccess = (user) => {
   return {
     type: LOGIN_SUCCESS,
-    user
+    user,
   };
 };
 export const LoginFailure = (user) => {
   return {
     type: LOGIN_FAILURE,
-    user
+    user,
   };
 };
 

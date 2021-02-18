@@ -20,14 +20,16 @@ const SignUp = (props) => {
 
   const handleSignUp = async () => {
     const user = {
-      "brand_name" : brand,
-      "user_name" : text,
-      "password" : password,
-      "confirm_password" : confirm
-  }
- console.log(user)
-    await axios.post(`${environment.apiBase}/brand/register`, user).then((res) => {
-      console.log(res.data)
+      brand_name: brand,
+      user_name: text,
+      password: password,
+      confirm_password: confirm,
+    };
+    console.log(user);
+    await axios
+      .post(`${environment.apiBase}/brand/register`, user)
+      .then((res) => {
+        console.log(res.data);
         props.navigation.navigate("HomeScreen");
       });
   };

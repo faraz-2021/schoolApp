@@ -5,32 +5,34 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import { ScrollView } from "react-native-gesture-handler";
-import Home from './src/screens/Home';
+import Home from "./src/screens/Home";
 import store from "./src/redux/store/store";
-import {Provider} from 'react-redux';
+import { Provider } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const token = AsyncStorage.getItem('token');
-const MainNavigator = createSwitchNavigator({
-  LogIn: { screen: Login },
-  SignUp: { screen: SignUp },
-  HomeScreen:{ screen: Home },
-  
-}, {
-  initialRouteName: token? "HomeScreen":"LogIn"
-});
+
+var token = AsyncStorage.getItem("token");
+const MainNavigator = createSwitchNavigator(
+  {
+    LogIn: { screen: Login },
+    SignUp: { screen: SignUp },
+    HomeScreen: { screen: Home },
+  },
+  {
+    initialRouteName: !token ? "LogIn" : "HomeScreen",
+  }
+);
 const Main = createAppContainer(MainNavigator);
 
 export default function App() {
   return (
     <Provider store={store}>
-        <NavigationContainer style={styles.container}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Main />
-      </ScrollView>
-      <StatusBar style="auto"/>
-    </NavigationContainer>
+      <NavigationContainer style={styles.container}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Main />
+        </ScrollView>
+        <StatusBar style="auto" />
+      </NavigationContainer>
     </Provider>
-  
   );
 }
 

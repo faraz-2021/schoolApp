@@ -12,20 +12,18 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
-import {connect} from 'react-redux';
-import { LoginRequest } from '../redux/Actions/action';
-
+import { connect } from "react-redux";
+import { LoginRequest } from "../redux/Actions/action";
 
 const Login = (props) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [brand, setBrand] = useState("");
   const user = {
-    "brand_name" : brand,
-    "user_name": text,
-   "password": password,
+    brand_name: brand,
+    user_name: text,
+    password: password,
   };
-
 
   const handleClick = () => {
     props.navigation.navigate("SignUp");
@@ -74,7 +72,10 @@ const Login = (props) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.Button} onPress={()=>props.Login(user)}>
+        <TouchableOpacity
+          style={styles.Button}
+          onPress={() => props.Login(user)}
+        >
           <Text style={styles.SignIn}>Sign In</Text>
           {props.isLoading ? (
             <ActivityIndicator size="small" color={Colors.violet} />
@@ -90,7 +91,6 @@ const Login = (props) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -170,17 +170,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state)=>{
- return{
-   isLoading: state.isLoading,
-   isSuccess:state.isSuccess
- }
-}
-const mapdispatchToProps = (dispatch) =>{
-  return{
-    Login :(user)=>dispatch(LoginRequest(user))
-  }
-  
-}
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.isLoading,
+    isSuccess: state.isSuccess,
+  };
+};
+const mapdispatchToProps = (dispatch) => {
+  return {
+    Login: (user) => dispatch(LoginRequest(user)),
+  };
+};
 
-export default connect(mapStateToProps,mapdispatchToProps)(Login);
+export default connect(mapStateToProps, mapdispatchToProps)(Login);

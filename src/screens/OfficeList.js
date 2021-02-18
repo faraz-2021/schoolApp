@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { environment } from "../../environment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getSubBrand } from '../redux/Actions/action';
+import { getSubBrand } from "../redux/Actions/action";
 import { connect } from "react-redux";
 
 const OfficeList = (props) => {
@@ -20,21 +20,20 @@ const OfficeList = (props) => {
   }, [getResult]);
   const getResult = async () => {
     const result = [];
-    
+
     const token = await AsyncStorage.getItem("token");
     console.log(token);
     const headers = {
-      "token": token,
+      token: token,
     };
     try {
       await axios
         .get(`${environment.apiBase}/brand/sub_brand/get`, { headers })
         .then((res) => {
-              res.data.forEach((e) => {
-                result.push({ name: e.subBrand_name, des: e.description });
-              });
-              props.dispatch(getSubBrand(result));
-          
+          res.data.forEach((e) => {
+            result.push({ name: e.subBrand_name, des: e.description });
+          });
+          props.dispatch(getSubBrand(result));
         });
     } catch (err) {
       console.error(err);
@@ -75,12 +74,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     value: state.value,
-  }
-}
+  };
+};
 const mapdispatchToProps = (dispatch) => {
   return {
-    dispatch
+    dispatch,
   };
 };
 
-export default connect(mapStateToProps,mapdispatchToProps)(OfficeList);
+export default connect(mapStateToProps, mapdispatchToProps)(OfficeList);

@@ -12,4 +12,3 @@ export const BRANDS_GOT = 'BRANDS_GOT'
 
 
 export const ADD_SUBRANDS = 'ADD_SUBRANDS'
-export const SUBRANDS_ADDED = 'SUBRANDS_ADDED'
