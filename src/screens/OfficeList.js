@@ -13,13 +13,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getSubBrand } from '../redux/Actions/action';
 import { connect } from "react-redux";
 
-const OfficeData = (props) => {
+const OfficeList = (props) => {
   const [data, setData] = useState([]);
-  const result = [];
   useEffect(() => {
     getResult();
   }, [getResult]);
   const getResult = async () => {
+    const result = [];
+    
     const token = await AsyncStorage.getItem("token");
     console.log(token);
     const headers = {
@@ -82,4 +83,4 @@ const mapdispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps,mapdispatchToProps)(OfficeData);
+export default connect(mapStateToProps,mapdispatchToProps)(OfficeList);

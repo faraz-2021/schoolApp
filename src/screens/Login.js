@@ -12,34 +12,21 @@ import {
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../colors/ConstantColors";
-import axios from "axios";
-import { environment } from "../../environment";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {connect} from 'react-redux';
+import { LoginRequest } from '../redux/Actions/action';
+
 
 const Login = (props) => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [brand, setBrand] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const SignIn = async () => {
-    const user = {
-      "brand_name" : brand,
-      "user_name": text,
-     "password": password,
-    };
-    setIsLoading(true);
-    try {
-      await axios.post(`${environment.apiBase}/brand/login`, user)
-          .then(async (res) => {
-            console.log(res);
-              await AsyncStorage.setItem("token", res.headers.token)
-              props.navigation.navigate("HomeScreen")
-          })
-  } catch (err) {
-      console.error(err)
-  }
+  const user = {
+    "brand_name" : brand,
+    "user_name": text,
+   "password": password,
   };
+
+
   const handleClick = () => {
     props.navigation.navigate("SignUp");
   };
@@ -87,9 +74,9 @@ const Login = (props) => {
           />
         </View>
 
-        <TouchableOpacity style={styles.Button} onPress={SignIn}>
+        <TouchableOpacity style={styles.Button} onPress={()=>props.Login(user)}>
           <Text style={styles.SignIn}>Sign In</Text>
-          {isLoading ? (
+          {props.isLoading ? (
             <ActivityIndicator size="small" color={Colors.violet} />
           ) : null}
         </TouchableOpacity>
@@ -104,7 +91,6 @@ const Login = (props) => {
   );
 };
 
-export default Login;
 
 const styles = StyleSheet.create({
   container: {
@@ -183,3 +169,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+const mapStateToProps = (state)=>{
+ return{
+   isLoading: state.isLoading,
+   isSuccess:state.isSuccess
+ }
+}
+const mapdispatchToProps = (dispatch) =>{
+  return{
+    Login :(user)=>dispatch(LoginRequest(user))
+  }
+  
+}
+
+export default connect(mapStateToProps,mapdispatchToProps)(Login);

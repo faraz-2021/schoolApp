@@ -11,29 +11,39 @@ import { Colors } from "../colors/ConstantColors";
 import { environment } from "../../environment";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addSubBrand } from "../redux/Actions/action";
+import { connect } from "react-redux";
 
 const OfficeModal = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [inputValue1, setInputValue1] = useState("");
-
-  const AddOffice = async () => {
-    const user = {
-      subBrand_name: inputValue,
-      description: inputValue1,
-    };
-    console.log(user);
-    const token = await AsyncStorage.getItem("token");
-    const headers = {
-      "token": token,
-    };
-    await axios
-      .post(`${environment.apiBase}/brand/sub_brand/add `, user, {headers} )
-      .then((res) => {
-        console.log(res, "klklkl");
-      });
-      props.setModalVisible(false);
-
+  const user = {
+    subBrand_name: inputValue,
+    description: inputValue1,
   };
+
+  // const AddOffice = async () => {
+  //   const user = {
+  //     subBrand_name: inputValue,
+  //     description: inputValue1,
+  //   };
+  //   console.log(user);
+  //   const token = await AsyncStorage.getItem("token");
+  //   const headers = {
+  //     token: token,
+  //   };
+  //   try {
+  //     await axios
+  //       .post(`${environment.apiBase}/brand/sub_brand/add `, user, { headers })
+  //       .then((res) => {
+  //         console.log(res, "klklkl");
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   props.setModalVisible(false);
+  // };
 
   return (
     <View>
@@ -66,7 +76,7 @@ const OfficeModal = (props) => {
               <TouchableOpacity onPress={props.handleClick}>
                 <Text style={styles.Button}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={AddOffice}>
+              <TouchableOpacity onPress={()=>props.Add(user), props.setModalVisible()}>
                 <Text style={styles.Button}>Done</Text>
               </TouchableOpacity>
             </View>
@@ -154,4 +164,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OfficeModal;
+function mapDispatchToProps(dispatch) {
+  return {
+    Add: (user) => {
+      dispatch(addSubBrand(user));
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(OfficeModal);

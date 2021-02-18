@@ -3,25 +3,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Colors } from "../colors/ConstantColors";
 import OfficeModal from "../component/OfficeModal";
-import OfficeData from "./OfficeAdd";
+import OfficeList from "./OfficeList";
 
-const DATA = [
-    {
-      id: 1,
-      office: 'DAV',
-      description:"this is DAV school"
-    },
-    {
-      id: 2,
-      office: 'DPS',
-      description:"this is DPS school"
-    },
-   
-  ];
+
 
 export default function Office() {
   const [modalVisible, setModalVisible] = useState(false);
-  const[officeList,setOfficeList] = useState(DATA);
   const handleClick = () => {
     setModalVisible(false);
   };
@@ -45,7 +32,7 @@ export default function Office() {
           setModalVisible={setModalVisible}
         />
       ) : null}
-      <OfficeData />
+      <OfficeList />
     </View>
   );
 }

@@ -6,6 +6,19 @@ import Office from './Office';
 
 const Drawer = createDrawerNavigator();
 
+function profileScreen({ navigation }) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.Header}>
+          <TouchableOpacity onPress={()=>navigation.openDrawer()}>
+            <FontAwesome name="bars" size={30} />
+          </TouchableOpacity>
+          <Text style={styles.Dashboard}>Dashboard</Text>
+        </View>
+      </View>
+    );
+  }
+
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
